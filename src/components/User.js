@@ -1,0 +1,17 @@
+
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+
+export default class User extends Component {
+	render() {
+		const { name } = this.props;
+		return (<div>
+			<p>Hello, { name }</p>
+		</div>);
+	}
+}
+
+User.PropTypes = {
+	name: PropTypes.string.isRequired
+}
