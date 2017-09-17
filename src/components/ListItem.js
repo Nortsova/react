@@ -16,12 +16,10 @@ class ListItem extends Component {
 		}
 	}
 	
-	handleDelete(e) {
-		e.preventDefault();
+	handleDelete() {
 		this.props.onDelete(this.props.id);
 	}
-	handleEdit(e) {
-		e.preventDefault();
+	handleEdit() {
 		this.setState({
 			editing: !this.state.editing
 		})
@@ -35,8 +33,7 @@ class ListItem extends Component {
 			editing: !this.state.editing
 		});
 	}
-	handleChecked(e) {
-		e.preventDefault();
+	handleChecked() {
 		this.props.onCheck(this.props.id);
 	}
 
@@ -46,9 +43,9 @@ class ListItem extends Component {
 			<li className={this.props.checked ? 'done' : ''}>
 				<div className='text'>{this.props.title}</div>
 				<div className='btns'>
-					<a href='#' className='btn' onClick={this.handleEdit}>Edit</a>
-					<a href='#' className='btn' onClick={this.handleDelete}>Delete</a>
-					<a href='#' className='btn' onClick={this.handleChecked}>{this.props.checked ? 'undo' : 'DO THIS'}</a>
+					<span className='btn' onClick={this.handleEdit}>Edit</span>
+					<span className='btn' onClick={this.handleDelete}>Delete</span>
+					<span className='btn' onClick={this.handleChecked}>{this.props.checked ? 'undo' : 'DO THIS'}</span>
 				</div>
 			</li>
 		);
