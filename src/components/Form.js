@@ -2,18 +2,11 @@ import React, { Component } from 'react';
 
 class Form extends Component {
 
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			title: ''
-		}
-
-
-		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-
+	state = {
+		title: ''
 	}
+	handleChange = ({ target }) => this.setState({ title: target.value });
+
 	handleSubmit(e) {
 		e.preventDefault();
 
@@ -24,20 +17,14 @@ class Form extends Component {
 			this.setState({ title: '' });
 		}
 	}
-	handleChange(event) {
-		const title = event.target.value;
-
-		this.setState({ title });
-	}
-
 
 	render() {
 		return (
-			<form className='form' onSubmit={this.handleSubmit}>
+			<form className='form' onSubmit={::this.handleSubmit}>
 				<input 
 					type='text' 
 					value={this.state.title}
-					onChange={this.handleChange}
+					onChange={::this.handleChange}
 					placeholder='What you should to do?' />
 				<button >add task</button>
 			</form>
