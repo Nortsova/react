@@ -3,39 +3,31 @@ export const EDIT_ITEM = 'EDIT_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const CHECK_ITEM = 'CHECK_ITEM';
 
+import uuid from 'uuid';
 
-let nextId = 4;
-export function addItem(title) {
-	return {
-		type: ADD_ITEM,
-		payload: {
-			title,
-			id: nextId++
-		}
+export const addItem = (title) => ({
+	type: ADD_ITEM,
+	payload: {
+		title,
+		id: uuid()
 	}
-}
-export function editItem(id, title) {
-	return {
-		type: EDIT_ITEM,
-		payload: {
-			title,
-			id
-		}
+});
+export const editItem = (id, title) => ({
+	type: EDIT_ITEM,
+	payload: {
+		title,
+		id
 	}
-}
-export function checkItem(id) {
-	return {
-		type: CHECK_ITEM,
-		payload: {
-			id
-		}
+})
+export const checkItem = (id) => ({
+	type: CHECK_ITEM,
+	payload: {
+		id
 	}
-}
-export function deleteItem(id) {
-	return {
-		type: DELETE_ITEM,
-		payload: {
-			id
-		}
+})
+export const deleteItem = (id) => ({
+	type: DELETE_ITEM,
+	payload: {
+		id
 	}
-}
+})

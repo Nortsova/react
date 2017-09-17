@@ -15,8 +15,6 @@ export default function reducer(state = [], action) {
 			if (item.id !== action.payload.id) {
 				return item;
 			}
-
-		
 			return {
 				...item,
 				title: action.payload.title
