@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+import ListItemForm from './ListItemForm';
+import ListItemElement from './ListItemElement';
+
 
 class ListItem extends Component {
 	constructor(props) {
@@ -38,34 +41,16 @@ class ListItem extends Component {
 	}
 
 
-	renderItem() {
-		return (
-			<li className={this.props.checked ? 'done' : ''}>
-				<div className='text'>{this.props.title}</div>
-				<div className='btns'>
-					<span className='btn' onClick={this.handleEdit}>Edit</span>
-					<span className='btn' onClick={this.handleDelete}>Delete</span>
-					<span className='btn' onClick={this.handleChecked}>{this.props.checked ? 'undo' : 'DO THIS'}</span>
-				</div>
-			</li>
-		);
-	}
-	renderForm() {
-		return (
-			<li>
-				<form onSubmit={this.handleSubmit}>
-					<input 
-						type='text'
-						defaultValue={this.props.title}
-						ref='title' />
-					<button>Save</button>
-				</form>
-				
-			</li>
-		);
-	}
 	render() {
-		return this.state.editing ? this.renderForm() : this.renderItem();
+		return this.state.editing ? 
+			<ListItemForm title={this.props.title} handleSubmit={this.handleSubmit}/> 
+			: 
+			<ListItemElement 
+				title={this.props.title} 
+				checked={this.props.checked}
+				handleEdit={this.handleEdit}
+				handleChecked={this.handleChecked}
+				handleDelete={this.handleDelete} />;
 	}
 }
 
