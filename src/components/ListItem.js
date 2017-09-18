@@ -3,54 +3,43 @@ import React, {Component} from 'react';
 import ListItemForm from './ListItemForm';
 import ListItemElement from './ListItemElement';
 
-
+// ?
 class ListItem extends Component {
-	constructor(props) {
-		super(props);
-
-
-		this.handleDelete = this.handleDelete.bind(this);
-		this.handleEdit = this.handleEdit.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleChecked = this.handleChecked.bind(this);
-
-		this.state = {
-			editing: false
-		}
+	state = {
+		editing: false
 	}
 	
-	handleDelete() {
-		this.props.onDelete(this.props.id);
-	}
-	handleEdit() {
-		this.setState({
-			editing: !this.state.editing
-		})
-	}
-	
-	handleSubmit(e) {
+	handleSubmit = (e) => {
 		e.preventDefault();
-		const title = this.refs.title.value;
-		this.props.onEdit(this.props.id, title);
-		this.setState({
-			editing: !this.state.editing
+		const title = this.inputElement.value; // ?
+		this.props.onEdit(title);
+		this.setState((state) => {
+			return {
+				editing: !state.editing
+			}
 		});
 	}
-	handleChecked() {
-		this.props.onCheck(this.props.id);
-	}
-
-
-	render() {
+	
+	render = () => {
+		const {title, checked, onCheck,onDelete } = this.props;
 		return this.state.editing ? 
-			<ListItemForm title={this.props.title} handleSubmit={this.handleSubmit}/> 
+			<ListItemForm 
+				title={title} 
+				handleSubmit={this.handleSubmit}
+				inputRef={el => this.inputElement = el}/> 
 			: 
 			<ListItemElement 
-				title={this.props.title} 
-				checked={this.props.checked}
-				handleEdit={this.handleEdit}
-				handleChecked={this.handleChecked}
-				handleDelete={this.handleDelete} />;
+				title={title} 
+				checked={checked}
+				handleEdit={() => {
+					this.setState((state) => {
+						return {
+							editing: !state.editing
+						}
+					});
+				}}
+				handleChecked={onCheck}
+				handleDelete={onDelete} />;
 	}
 }
 
