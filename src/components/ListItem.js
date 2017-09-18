@@ -13,11 +13,7 @@ class ListItem extends Component {
 		e.preventDefault();
 		const title = this.inputElement.value; // ?
 		this.props.onEdit(title);
-		this.setState((state) => {
-			return {
-				editing: !state.editing
-			}
-		});
+		this.setState((state) => ({editing: !state.editing}));
 	}
 	
 	render = () => {
@@ -31,13 +27,7 @@ class ListItem extends Component {
 			<ListItemElement 
 				title={title} 
 				checked={checked}
-				handleEdit={() => {
-					this.setState((state) => {
-						return {
-							editing: !state.editing
-						}
-					});
-				}}
+				handleEdit={() => this.setState((state) => ({editing: !state.editing}))}
 				handleChecked={onCheck}
 				handleDelete={onDelete} />;
 	}

@@ -2,7 +2,7 @@
 import { ADD_ITEM, EDIT_ITEM, DELETE_ITEM, CHECK_ITEM } from '../actions';
 
 
-export default function reducer(state = [], action) {
+const reducer = (state = [], action) => {
   switch (action.type) {
     case ADD_ITEM:
     {
@@ -48,5 +48,6 @@ export default function reducer(state = [], action) {
 
     default: return state;
   }
-}
+};
 
+export default reducer;

@@ -16,7 +16,7 @@ const List = ({ data, onEdit, onDelete, onCheck }) => (
             onEdit={title => onEdit(id, title)}
             onCheck={() => onCheck(id)}
             key={id}
-					/>
+          />
         );
       },
       )
