@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import ListItemForm from './ListItemForm';
-import ListItemElement from './ListItemElement';
+import { ListItemForm, ListItemElement } from 'components';
 
 class ListItem extends Component {
   state = {
@@ -31,7 +30,7 @@ class ListItem extends Component {
      <ListItemElement
        title={title}
        checked={checked}
-       handleEdit={this.handleEdi}
+       handleEdit={this.handleEdit}
        handleChecked={onCheck}
        handleDelete={onDelete}
      />;

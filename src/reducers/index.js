@@ -1,6 +1,6 @@
 import { combineReducer } from 'redux';
 
-import { ADD_ITEM, EDIT_ITEM, DELETE_ITEM, CHECK_ITEM } from '../actions';
+import { ADD_ITEM, EDIT_ITEM, DELETE_ITEM, CHECK_ITEM } from 'actions';
 
 
 const reducer = (state = [], action) => {

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import FormContainer from './containers/FormContainer';
-import ListContainer from './containers/ListContainer';
+import { FormContainer, ListContainer } from 'containers';
 
 const App = () => (
   <div className="app">

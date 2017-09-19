@@ -22,7 +22,8 @@ module.exports = {
     new NpmInstallPlugin(),
   ],
   resolve: {
-    modules: ['node_modules', 'src'],
+    extensions: ['.js', '.jsx'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
   module: {
     rules: [

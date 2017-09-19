@@ -1,7 +1,6 @@
-
 import React from 'react';
-
-import ListItem from './ListItem';
+import PropTypes from 'prop-types';
+import { ListItem } from 'components';
 
 const List = ({ data, onEdit, onDelete, onCheck }) => (
   <ul className="task-list">
@@ -13,7 +12,7 @@ const List = ({ data, onEdit, onDelete, onCheck }) => (
             title={title}
             checked={checked}
             onDelete={() => onDelete(id)}
-            onEdit={title => onEdit(id, title)}
+            onEdit={name => onEdit(id, name)}
             onCheck={() => onCheck(id)}
             key={id}
           />
@@ -23,5 +22,12 @@ const List = ({ data, onEdit, onDelete, onCheck }) => (
     }
   </ul>
 );
+
+List.propTypes = {
+  data: PropTypes.array.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onCheck: PropTypes.func.isRequired,
+};
 
 export default List;
