@@ -1,6 +1,5 @@
-
 import { connect } from 'react-redux';
-import Form from '../components/Form';
+import { Form } from 'components';
 
 import { addItem } from '../actions';
 

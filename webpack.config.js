@@ -21,6 +21,9 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new NpmInstallPlugin(),
   ],
+  resolve: {
+    modules: ['node_modules', 'src'],
+  },
   module: {
     rules: [
       {
