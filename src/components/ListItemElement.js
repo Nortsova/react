@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ListItemElement = props => (
-  <li className={props.checked ? 'done' : ''}>
-    <div className="text">{props.title}</div>
+const ListItemElement = ({ checked, title, handleEdit, handleDelete, handleChecked }) => (
+  <li className={checked ? 'done' : ''}>
+    <div className="text">{title}</div>
     <div className="btns">
-      <button type="button" className="btn" onClick={props.handleEdit}>Edit</button>
-      <button type="button" className="btn" onClick={props.handleDelete}>Delete</button>
-      <button type="button" className="btn" onClick={props.handleChecked}>{props.checked ? 'undo' : 'DO THIS'}</button>
+      <button type="button" className="btn" onClick={handleEdit}>Edit</button>
+      <button type="button" className="btn" onClick={handleDelete}>Delete</button>
+      <button type="button" className="btn" onClick={handleChecked}>{checked ? 'undo' : 'DO THIS'}</button>
     </div>
   </li>
 );

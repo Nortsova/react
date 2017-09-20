@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ListItemForm = props => (
+const ListItemForm = ({ handleSubmit, handleChange, title }) => (
   <li>
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         name="title"
-        onChange={props.handleChange}
-        defaultValue={props.title}
+        onChange={handleChange}
+        defaultValue={title}
 
       />
       <button>Save</button>

@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import { List } from 'components';
 import { deleteItem, editItem, checkItem } from 'actions';
 
-const mapStateToProps = state => ({ data: state });
+
+const mapStateToProps = ({ data }) => ({ data });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   onDelete: deleteItem,

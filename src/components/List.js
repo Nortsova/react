@@ -21,7 +21,12 @@ const List = ({ data, onEdit, onDelete, onCheck }) => (
 );
 
 List.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    checked: PropTypes.bool,
+  }),
+  ).isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   onCheck: PropTypes.func.isRequired,

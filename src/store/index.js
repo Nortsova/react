@@ -1,6 +1,8 @@
 import { createStore } from 'redux';
 import reducer from 'reducers';
-import store from './data';
+import data from './data.json';
 
-const storeData = createStore(reducer, store);
+
+const storeData = createStore(reducer, data);
+
 export default storeData;
