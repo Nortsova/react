@@ -14,9 +14,12 @@ class ListItem extends Component {
 
  handleSubmit = (e) => {
    e.preventDefault();
-   const title = this.inputElement.value; // ?
-   this.props.onEdit(title);
+   this.props.onEdit(this.state.title);
    this.setState(state => ({ editing: !state.editing }));
+ }
+
+ handleChange = ({ target: { name, value } }) => {
+   this.setState({ [name]: value });
  }
 
  render = () => {
@@ -25,7 +28,7 @@ class ListItem extends Component {
      <ListItemForm
        title={title}
        handleSubmit={this.handleSubmit}
-       inputRef={el => this.inputElement = el}
+       handleChange={this.handleChange}
      />
      :
      <ListItemElement
@@ -45,6 +48,6 @@ ListItem.propTypes = {
   onDelete: propTypes.func.isRequired,
   onEdit: propTypes.func.isRequired,
   onCheck: propTypes.func.isRequired,
-}
+};
 
 export default ListItem;

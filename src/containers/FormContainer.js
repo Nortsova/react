@@ -6,7 +6,7 @@ import { addItem } from 'actions';
 
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  onAdd: addItem
+  onAdd: addItem,
 }, dispatch);
 
 const FormContainer = connect(null, mapDispatchToProps)(Form);

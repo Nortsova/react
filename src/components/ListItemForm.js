@@ -6,8 +6,10 @@ const ListItemForm = props => (
     <form onSubmit={props.handleSubmit}>
       <input
         type="text"
+        name="title"
+        onChange={props.handleChange}
         defaultValue={props.title}
-        ref={props.inputRef}
+
       />
       <button>Save</button>
     </form>
@@ -18,7 +20,7 @@ const ListItemForm = props => (
 ListItemForm.propTypes = {
   title: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  inputRef: PropTypes.func.isRequired
-}
+  handleChange: PropTypes.func.isRequired,
+};
 
 export default ListItemForm;

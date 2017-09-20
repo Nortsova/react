@@ -18,6 +18,6 @@ ListItemElement.propTypes = {
   handleEdit: PropTypes.func.isRequired,
   handleChecked: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
-}
+};
 
 export default ListItemElement;

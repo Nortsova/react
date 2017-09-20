@@ -8,7 +8,7 @@
     ],
     "rules": {
         "react/jsx-filename-extension": 0,
-        "react/jsx-uses-vars": "error",
+        "react/jsx-uses-vars": "error"
     },
     "globals": {
       "document": true
