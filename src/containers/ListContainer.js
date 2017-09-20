@@ -6,10 +6,10 @@ import { deleteItem, editItem, checkItem } from 'actions';
 
 const mapStateToProps = state => ({ data: state });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
+const mapDispatchToProps = dispatch => bindActionCreators({
   onDelete: deleteItem,
   onEdit: editItem,
-  onCheck: checkItem
+  onCheck: checkItem,
 }, dispatch);
 
 
