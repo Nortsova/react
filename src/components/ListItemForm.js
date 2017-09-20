@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 const ListItemForm = props => (
   <li>
@@ -15,6 +15,10 @@ const ListItemForm = props => (
   </li>
 );
 
-// ?
+ListItemForm.propTypes = {
+  title: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  inputRef: PropTypes.func.isRequired
+}
 
 export default ListItemForm;

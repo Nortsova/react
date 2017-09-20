@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ListItemElement = props => (
   <li className={props.checked ? 'done' : ''}>
@@ -10,5 +11,13 @@ const ListItemElement = props => (
     </div>
   </li>
 );
+
+ListItemElement.propTypes = {
+  title: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
+  handleEdit: PropTypes.func.isRequired,
+  handleChecked: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
+}
 
 export default ListItemElement;

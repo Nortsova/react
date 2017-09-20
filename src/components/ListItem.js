@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 
 import { ListItemForm, ListItemElement } from 'components';
 
@@ -35,6 +36,15 @@ class ListItem extends Component {
        handleDelete={onDelete}
      />;
  }
+}
+
+
+ListItem.propTypes = {
+  title: propTypes.string.isRequired,
+  checked: propTypes.bool.isRequired,
+  onDelete: propTypes.func.isRequired,
+  onEdit: propTypes.func.isRequired,
+  onCheck: propTypes.func.isRequired,
 }
 
 export default ListItem;
