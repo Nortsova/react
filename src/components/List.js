@@ -5,19 +5,16 @@ import { ListItem } from 'components';
 const List = ({ data, onEdit, onDelete, onCheck }) => (
   <ul className="task-list">
     {
-      data.map((task) => {
-        const { id, title, checked } = task;
-        return (
-          <ListItem
-            title={title}
-            checked={checked}
-            onDelete={() => onDelete(id)}
-            onEdit={name => onEdit(id, name)}
-            onCheck={() => onCheck(id)}
-            key={id}
-          />
-        );
-      },
+      data.map(({ id, title, checked }) => (
+        <ListItem
+          title={title}
+          checked={checked}
+          onDelete={() => onDelete(id)}
+          onEdit={name => onEdit(id, name)}
+          onCheck={() => onCheck(id)}
+          key={id}
+        />
+      ),
       )
     }
   </ul>
