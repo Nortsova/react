@@ -45,30 +45,29 @@ app.post('/api/data', (req, res) => {
 app.put('/api/data/:id', (req, res) => {
   readFile((err, data) => {
     const array = JSON.parse(data);
-    let arrayObj = {};
-    array.map((item) => {
+    const newArray = array.map((item) => {
       if (item.id === req.params.id) {
-        arrayObj = item;
+        const arrayObj = item;
         arrayObj.title = req.body.title;
       }
       return item;
     });
-    saveChanges(array);
+    saveChanges(newArray);
     res.json(array);
   });
 });
 app.put('/api/data-checked/:id', (req, res) => {
   readFile((err, data) => {
     const array = JSON.parse(data);
-    let arrayObj = {};
-    array.map((item) => {
-      if (item.id === req.params.id) {
-        arrayObj = item;
-        arrayObj.checked = !item.checked;
+    const newArray = array.map((item) => {
+      if (item.id !== req.params.id) {
+        return item;
       }
-      return item;
+      const newItem = item;
+      newItem.checked = !item.checked;
+      return newItem;
     });
-    saveChanges(array);
+    saveChanges(newArray);
     res.json(array);
   });
 });
