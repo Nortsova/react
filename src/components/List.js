@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItem } from 'components';
 
-const List = ({ data, onEdit, onDelete, onCheck }) => (
+
+const List = ({ data, loading, onEdit, onDelete, onCheck }) => (
   <ul className="task-list">
-    {
+    {!loading && data.length ?
       data.map(({ id, title, checked }) => (
         <ListItem
           title={title}
@@ -16,6 +17,8 @@ const List = ({ data, onEdit, onDelete, onCheck }) => (
         />
       ),
       )
+      :
+      <p>loading</p>
     }
   </ul>
 );
@@ -27,6 +30,7 @@ List.propTypes = {
     checked: PropTypes.bool,
   }),
   ).isRequired,
+  loading: PropTypes.bool.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   onCheck: PropTypes.func.isRequired,

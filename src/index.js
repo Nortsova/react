@@ -5,8 +5,10 @@ import { Provider } from 'react-redux';
 import App from './App';
 import './styles/styles.scss';
 import storeData from './store';
+import { loadData, getData } from './actions';
 
 
+storeData.dispatch(getData());
 render(
   <Provider store={storeData}>
     <App />

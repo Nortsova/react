@@ -5,7 +5,7 @@ import { List } from 'components';
 import { deleteItem, editItem, checkItem } from 'actions';
 
 
-const mapStateToProps = ({ data }) => ({ data });
+const mapStateToProps = ({ data, loading }) => ({ data, loading });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   onDelete: deleteItem,

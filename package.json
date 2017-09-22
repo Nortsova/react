@@ -52,6 +52,7 @@
     "actions": "1.3.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
+    "body-parser": "1.18.1",
     "components": "0.1.0",
     "containers": "0.0.1",
     "data": "0.6.1",
