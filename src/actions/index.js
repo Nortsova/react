@@ -16,7 +16,7 @@ export const getData = () => (
       type: LOADING,
     });
 
-    request('api/data', 'GET')
+    request('api/data', { method: 'GET' })
       .then(data => (dispatch({
         type: GET_DATA,
         payload: {
@@ -28,11 +28,14 @@ export const getData = () => (
 );
 export const addItem = title => (
   (dispatch) => {
-    request('api/data', 'POST', JSON.stringify({
-      title,
-      id: uuid(),
-      checked: false,
-    }))
+    request('api/data', {
+      method: 'POST',
+      body: JSON.stringify({
+        title,
+        id: uuid(),
+        checked: false,
+      }),
+    })
       .then(data => (dispatch({
         type: ADD_ITEM,
         payload: data,
@@ -41,9 +44,12 @@ export const addItem = title => (
 );
 export const editItem = (id, title) => (
   (dispatch) => {
-    request(`./api/data/${id}`, 'PUT', JSON.stringify({
-      title,
-    }))
+    request(`./api/data/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        title,
+      }),
+    })
       .then(data => (dispatch({
         type: GET_DATA,
         payload: {
@@ -54,7 +60,9 @@ export const editItem = (id, title) => (
 );
 export const checkItem = id => (
   (dispatch) => {
-    request(`./api/data-checked/${id}`, 'PUT')
+    request(`./api/data-checked/${id}`, {
+      method: 'PUT',
+    })
       .then(data => (dispatch({
         type: GET_DATA,
         payload: {
@@ -65,7 +73,9 @@ export const checkItem = id => (
 );
 export const deleteItem = id => (
   (dispatch) => {
-    request(`./api/data/${id}`, 'DELETE')
+    request(`./api/data/${id}`, {
+      method: 'DELETE',
+    })
       .then(data => (dispatch({
         type: GET_DATA,
         payload: {
