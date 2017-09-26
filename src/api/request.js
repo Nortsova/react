@@ -1,27 +1,11 @@
-
 import fetch from 'isomorphic-fetch';
 
-export const getRequest = src => fetch(src);
-export const postRequest = (src, body) => fetch(src, {
+
+export default (url, method, body = null) => fetch(url, {
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   },
-  method: 'POST',
+  method,
   body,
-});
-export const putRequest = (src, body = null) => fetch(src, {
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-  method: 'PUT',
-  body,
-});
-export const deleteRequest = src => fetch(src, {
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-  method: 'DELETE',
-});
+}).then(res => res.json());

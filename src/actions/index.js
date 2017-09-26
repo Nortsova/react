@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 
-import { getRequest, postRequest, putRequest, deleteRequest } from 'api';
+import request from 'api';
 
 export const LOADING = 'LOADING';
 export const GET_DATA = 'GET_DATA';
@@ -16,7 +16,7 @@ export const getData = () => (
       type: LOADING,
     });
 
-    getRequest('api/data').then(res => res.json())
+    request('api/data', 'GET')
       .then(data => (dispatch({
         type: GET_DATA,
         payload: {
@@ -28,12 +28,11 @@ export const getData = () => (
 );
 export const addItem = title => (
   (dispatch) => {
-    postRequest('api/data', JSON.stringify({
+    request('api/data', 'POST', JSON.stringify({
       title,
       id: uuid(),
       checked: false,
     }))
-      .then(res => res.json())
       .then(data => (dispatch({
         type: ADD_ITEM,
         payload: data,
@@ -42,10 +41,9 @@ export const addItem = title => (
 );
 export const editItem = (id, title) => (
   (dispatch) => {
-    putRequest(`./api/data/${id}`, JSON.stringify({
+    request(`./api/data/${id}`, 'PUT', JSON.stringify({
       title,
     }))
-      .then(res => res.json())
       .then(data => (dispatch({
         type: GET_DATA,
         payload: {
@@ -56,8 +54,7 @@ export const editItem = (id, title) => (
 );
 export const checkItem = id => (
   (dispatch) => {
-    putRequest(`./api/data-checked/${id}`)
-      .then(res => res.json())
+    request(`./api/data-checked/${id}`, 'PUT')
       .then(data => (dispatch({
         type: GET_DATA,
         payload: {
@@ -68,8 +65,7 @@ export const checkItem = id => (
 );
 export const deleteItem = id => (
   (dispatch) => {
-    deleteRequest(`./api/data/${id}`)
-      .then(res => res.json())
+    request(`./api/data/${id}`, 'DELETE')
       .then(data => (dispatch({
         type: GET_DATA,
         payload: {

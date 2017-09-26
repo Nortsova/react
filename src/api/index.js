@@ -1,5 +1,5 @@
 
 
-import { getRequest, postRequest, putRequest, deleteRequest } from './request';
+import request from './request';
 
-export { getRequest, postRequest, putRequest, deleteRequest };
+export default request;
