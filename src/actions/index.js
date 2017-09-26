@@ -1,5 +1,7 @@
 import uuid from 'uuid';
 
+import { getRequest, postRequest, putRequest, deleteRequest } from 'api';
+
 export const LOADING = 'LOADING';
 export const GET_DATA = 'GET_DATA';
 export const ADD_ITEM = 'ADD_ITEM';
@@ -14,8 +16,7 @@ export const getData = () => (
       type: LOADING,
     });
 
-    fetch('./api/data')
-      .then(res => res.json())
+    getRequest('api/data').then(res => res.json())
       .then(data => (dispatch({
         type: GET_DATA,
         payload: {
@@ -27,18 +28,11 @@ export const getData = () => (
 );
 export const addItem = title => (
   (dispatch) => {
-    fetch('./api/data', {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        title,
-        id: uuid(),
-        checked: false,
-      }),
-    })
+    postRequest('api/data', JSON.stringify({
+      title,
+      id: uuid(),
+      checked: false,
+    }))
       .then(res => res.json())
       .then(data => (dispatch({
         type: ADD_ITEM,
@@ -48,16 +42,9 @@ export const addItem = title => (
 );
 export const editItem = (id, title) => (
   (dispatch) => {
-    fetch(`./api/data/${id}`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'PUT',
-      body: JSON.stringify({
-        title,
-      }),
-    })
+    putRequest(`./api/data/${id}`, JSON.stringify({
+      title,
+    }))
       .then(res => res.json())
       .then(data => (dispatch({
         type: GET_DATA,
@@ -69,13 +56,7 @@ export const editItem = (id, title) => (
 );
 export const checkItem = id => (
   (dispatch) => {
-    fetch(`./api/data-checked/${id}`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'PUT',
-    })
+    putRequest(`./api/data-checked/${id}`)
       .then(res => res.json())
       .then(data => (dispatch({
         type: GET_DATA,
@@ -87,13 +68,7 @@ export const checkItem = id => (
 );
 export const deleteItem = id => (
   (dispatch) => {
-    fetch(`./api/data/${id}`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'DELETE',
-    })
+    deleteRequest(`./api/data/${id}`)
       .then(res => res.json())
       .then(data => (dispatch({
         type: GET_DATA,
