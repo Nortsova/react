@@ -10,77 +10,46 @@ export const DELETE_ITEM = 'DELETE_ITEM';
 export const CHECK_ITEM = 'CHECK_ITEM';
 
 
-export const getData = () => (
-  (dispatch) => {
-    dispatch({
-      type: LOADING,
-    });
-
-    request('api/data', { method: 'GET' })
-      .then(data => (dispatch({
-        type: GET_DATA,
-        payload: {
-          data,
-        },
-      })));
-  }
-
-);
-export const addItem = title => (
-  (dispatch) => {
-    request('api/data', {
-      method: 'POST',
-      body: JSON.stringify({
+export const loading = () => ({
+  type: LOADING,
+});
+export const getData = () => ({
+  type: GET_DATA,
+  payload: request('api/data').then(data => ({ data })),
+});
+export const addItem = title => ({
+  type: ADD_ITEM,
+  payload: request('api/data', {
+    method: 'POST',
+    data: {
+      item: JSON.stringify({
         title,
         id: uuid(),
         checked: false,
       }),
-    })
-      .then(data => (dispatch({
-        type: ADD_ITEM,
-        payload: data,
-      })));
-  }
-);
-export const editItem = (id, title) => (
-  (dispatch) => {
-    request(`./api/data/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify({
+    },
+  }),
+});
+export const editItem = (id, title) => ({
+  type: GET_DATA,
+  payload: request(`./api/data/${id}`, {
+    method: 'PUT',
+    data: {
+      item: JSON.stringify({
         title,
       }),
-    })
-      .then(data => (dispatch({
-        type: GET_DATA,
-        payload: {
-          data,
-        },
-      })));
-  }
-);
-export const checkItem = id => (
-  (dispatch) => {
-    request(`./api/data-checked/${id}`, {
-      method: 'PUT',
-    })
-      .then(data => (dispatch({
-        type: GET_DATA,
-        payload: {
-          data,
-        },
-      })));
-  }
-);
-export const deleteItem = id => (
-  (dispatch) => {
-    request(`./api/data/${id}`, {
-      method: 'DELETE',
-    })
-      .then(data => (dispatch({
-        type: GET_DATA,
-        payload: {
-          data,
-        },
-      })));
-  }
-);
+    },
+  }).then(data => ({ data })),
+});
+export const checkItem = id => ({
+  type: GET_DATA,
+  payload: request(`./api/data-checked/${id}`, {
+    method: 'PUT',
+  }).then(data => ({ data })),
+});
+export const deleteItem = id => ({
+  type: GET_DATA,
+  payload: request(`./api/data/${id}`, {
+    method: 'DELETE',
+  }).then(data => ({ data })),
+});

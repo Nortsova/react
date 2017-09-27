@@ -1,10 +1,9 @@
-import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 
 
-export default (url, options) => fetch(url, {
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
+export default (url, options) => axios({
+  method: 'GET',
+  url,
   ...options,
-}).then(res => res.json());
+})
+  .then(res => res.data);

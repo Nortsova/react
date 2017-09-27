@@ -14,8 +14,6 @@ const todo = createReducer(initialState, {
       if (item.id !== id) {
         return item;
       }
-
-
       return {
         ...item,
         checked: !item.checked,

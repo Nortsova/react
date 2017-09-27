@@ -37,9 +37,9 @@ app.get('/api/data', (req, res) => {
 app.post('/api/data', (req, res) => {
   readFile((err, data) => {
     const array = JSON.parse(data);
-    array.push(req.body);
+    array.push(JSON.parse(req.body.item));
     saveChanges(array);
-    res.json(req.body);
+    res.json(JSON.parse(req.body.item));
   });
 });
 app.put('/api/data/:id', (req, res) => {
@@ -48,7 +48,7 @@ app.put('/api/data/:id', (req, res) => {
     const newArray = array.map((item) => {
       if (item.id === req.params.id) {
         const arrayObj = item;
-        arrayObj.title = req.body.title;
+        arrayObj.title = JSON.parse(req.body.item).title;
       }
       return item;
     });
