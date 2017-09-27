@@ -1,3 +1,1 @@
-import * as api from './todo';
-
-export default api;
+export * as todosApi from './todo';

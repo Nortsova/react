@@ -1,5 +1,6 @@
-import api from 'api';
+import { todosApi } from 'api';
 
+console.log(todosApi);
 export const LOADING = 'LOADING';
 export const GET_DATA = 'GET_DATA';
 export const ADD_ITEM = 'ADD_ITEM';
@@ -13,21 +14,21 @@ export const loading = () => ({
 });
 export const getData = () => ({
   type: GET_DATA,
-  payload: api.getDataRequest(),
+  payload: todosApi.getDataRequest(),
 });
 export const addItem = title => ({
   type: ADD_ITEM,
-  payload: api.addItemRequest({ title }),
+  payload: todosApi.addItemRequest({ title }),
 });
 export const editItem = (id, title) => ({
   type: GET_DATA,
-  payload: api.editItemRequest(id, { title }),
+  payload: todosApi.editItemRequest(id, { title }),
 });
 export const checkItem = id => ({
   type: GET_DATA,
-  payload: api.checkItemRequest(id),
+  payload: todosApi.checkItemRequest(id),
 });
 export const deleteItem = id => ({
   type: GET_DATA,
-  payload: api.deleteItemRequest(id),
+  payload: todosApi.deleteItemRequest(id),
 });

@@ -1,4 +1,2 @@
-import FormContainer from './FormContainer';
-import ListContainer from './ListContainer';
-
-export { FormContainer, ListContainer };
+export { default as FormContainer } from './FormContainer';
+export { default as ListContainer } from './ListContainer';
