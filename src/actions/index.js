@@ -1,6 +1,4 @@
-import uuid from 'uuid';
-
-import request from 'api';
+import api from 'api';
 
 export const LOADING = 'LOADING';
 export const GET_DATA = 'GET_DATA';
@@ -15,41 +13,21 @@ export const loading = () => ({
 });
 export const getData = () => ({
   type: GET_DATA,
-  payload: request('api/data').then(data => ({ data })),
+  payload: api.getDataRequest(),
 });
 export const addItem = title => ({
   type: ADD_ITEM,
-  payload: request('api/data', {
-    method: 'POST',
-    data: {
-      item: JSON.stringify({
-        title,
-        id: uuid(),
-        checked: false,
-      }),
-    },
-  }),
+  payload: api.addItemRequest({ title }),
 });
 export const editItem = (id, title) => ({
   type: GET_DATA,
-  payload: request(`./api/data/${id}`, {
-    method: 'PUT',
-    data: {
-      item: JSON.stringify({
-        title,
-      }),
-    },
-  }).then(data => ({ data })),
+  payload: api.editItemRequest(id, { title }),
 });
 export const checkItem = id => ({
   type: GET_DATA,
-  payload: request(`./api/data-checked/${id}`, {
-    method: 'PUT',
-  }).then(data => ({ data })),
+  payload: api.checkItemRequest(id),
 });
 export const deleteItem = id => ({
   type: GET_DATA,
-  payload: request(`./api/data/${id}`, {
-    method: 'DELETE',
-  }).then(data => ({ data })),
+  payload: api.deleteItemRequest(id),
 });

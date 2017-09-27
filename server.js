@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const config = require('./webpack.config');
 
+const uuid = require('uuid');
+
 
 const app = new (require('express'))();
 
@@ -17,13 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // for correct reading data from html forms
 
 
-function readFile(func) {
-  fs.readFile('./src/data.json', (err, data) => func(err, data));
+function readFile(callback) {
+  fs.readFile('./src/data.json', callback);
 }
 function saveChanges(file, callback) {
   fs.writeFile('./src/data.json', JSON.stringify(file), callback);
 }
-
 
 app.get('/', (req, res) => {
   res.sendFile(`${__dirname}/index.html`);
@@ -37,9 +38,14 @@ app.get('/api/data', (req, res) => {
 app.post('/api/data', (req, res) => {
   readFile((err, data) => {
     const array = JSON.parse(data);
-    array.push(JSON.parse(req.body.item));
+    const newItem = {
+      title: req.body.title,
+      id: uuid(),
+      checked: false,
+    };
+    array.push(newItem);
     saveChanges(array);
-    res.json(JSON.parse(req.body.item));
+    res.json(newItem);
   });
 });
 app.put('/api/data/:id', (req, res) => {
@@ -48,12 +54,12 @@ app.put('/api/data/:id', (req, res) => {
     const newArray = array.map((item) => {
       if (item.id === req.params.id) {
         const arrayObj = item;
-        arrayObj.title = JSON.parse(req.body.item).title;
+        arrayObj.title = req.body.title;
       }
       return item;
     });
     saveChanges(newArray);
-    res.json(array);
+    res.json({ data: newArray });
   });
 });
 app.put('/api/data-checked/:id', (req, res) => {
@@ -68,7 +74,7 @@ app.put('/api/data-checked/:id', (req, res) => {
       return newItem;
     });
     saveChanges(newArray);
-    res.json(array);
+    res.json({ data: newArray });
   });
 });
 app.delete('/api/data/:id', (req, res) => {
@@ -87,7 +93,7 @@ app.delete('/api/data/:id', (req, res) => {
     array.splice(index, 1);
 
     saveChanges(array);
-    res.json(array);
+    res.json({ data: array });
   });
 });
 

@@ -1,5 +1,3 @@
+import * as api from './todo';
 
-
-import request from './request';
-
-export default request;
+export default api;
