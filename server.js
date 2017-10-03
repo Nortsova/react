@@ -36,65 +36,45 @@ app.get('/api/data', (req, res) => {
   });
 });
 app.post('/api/data', (req, res) => {
-  console.log(req);
   readFile((err, data) => {
-    const array = JSON.parse(data);
+    const objectTodos = JSON.parse(data);
+    const itemId = uuid();
     const newItem = {
       title: req.body.title,
-      id: uuid(),
+      id: itemId,
       checked: false,
     };
-    array.push(newItem);
-    saveChanges(array);
+    if (!objectTodos[itemId]) {
+      objectTodos[itemId] = newItem;
+    }
+    saveChanges(objectTodos);
     res.json(newItem);
   });
 });
+
+
 app.put('/api/data/:id', (req, res) => {
   readFile((err, data) => {
-    const array = JSON.parse(data);
-    const newArray = array.map((item) => {
-      if (item.id === req.params.id) {
-        const arrayObj = item;
-        arrayObj.title = req.body.title;
-      }
-      return item;
-    });
-    saveChanges(newArray);
-    res.json({ data: newArray });
+    const objectTodos = JSON.parse(data);
+    objectTodos[req.params.id].title = req.body.title;
+    saveChanges(objectTodos);
+    res.json(objectTodos[req.params.id]);
   });
 });
 app.put('/api/data-checked/:id', (req, res) => {
   readFile((err, data) => {
-    const array = JSON.parse(data);
-    const newArray = array.map((item) => {
-      if (item.id !== req.params.id) {
-        return item;
-      }
-      const newItem = item;
-      newItem.checked = !item.checked;
-      return newItem;
-    });
-    saveChanges(newArray);
-    res.json({ data: newArray });
+    const objectTodos = JSON.parse(data);
+    objectTodos[req.params.id].checked = !objectTodos[req.params.id].checked;
+    saveChanges(objectTodos);
+    res.json(objectTodos[req.params.id]);
   });
 });
 app.delete('/api/data/:id', (req, res) => {
   readFile((err, data) => {
-    const array = JSON.parse(data);
-
-
-    let index = 0;
-    array.forEach((item, currIndex) => {
-      console.log(item.id, req.params.id);
-      if (item.id === req.params.id.toString()) {
-        index = currIndex;
-      }
-    });
-
-    array.splice(index, 1);
-
-    saveChanges(array);
-    res.json({ data: array });
+    const objectTodos = JSON.parse(data);
+    delete objectTodos[req.params.id];
+    saveChanges(objectTodos);
+    res.json({ status: 'ok' });
   });
 });
 

@@ -5,8 +5,8 @@ import { ListItem } from 'components';
 
 const List = ({ data, loading, onEdit, onDelete, onCheck }) => (
   <ul className="task-list">
-    {!loading && data.length ?
-      data.map(({ id, title, checked }) => (
+    {!loading && Object.values(data).length ?
+      Object.values(data).map(({ id, title, checked }) => (
         <ListItem
           title={title}
           checked={checked}
@@ -24,7 +24,7 @@ const List = ({ data, loading, onEdit, onDelete, onCheck }) => (
 );
 
 List.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
+  data: PropTypes.objectOf(PropTypes.shape({
     id: PropTypes.string,
     title: PropTypes.string,
     checked: PropTypes.bool,

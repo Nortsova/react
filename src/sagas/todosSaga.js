@@ -13,34 +13,28 @@ function* loadTodos() {
 }
 
 function* addTodo({ payload: { title } }) {
-  const data = yield call(todosApi.addItemRequest, { title });
+  const todo = yield call(todosApi.addItemRequest, { title });
   yield put({ type: TODO_ADDED,
-    payload: data,
+    payload: todo,
   });
 }
 
 function* editTodo({ payload: { id, title } }) {
-  const { data } = yield call(todosApi.editItemRequest, id, { title });
+  const data = yield call(todosApi.editItemRequest, id, { title });
   yield put({ type: TODO_EDITED,
-    payload: {
-      data,
-    },
+    payload: data,
   });
 }
 function* deleteTodo({ payload: { id } }) {
-  const { data } = yield call(todosApi.deleteItemRequest, id);
+  yield call(todosApi.deleteItemRequest, id);
   yield put({ type: TODO_DELETED,
-    payload: {
-      data,
-    },
+    payload: { id },
   });
 }
 function* checkTodo({ payload: { id } }) {
-  const { data } = yield call(todosApi.checkItemRequest, id);
+  const data = yield call(todosApi.checkItemRequest, id);
   yield put({ type: TODO_CHECKED,
-    payload: {
-      data,
-    },
+    payload: data,
   });
 }
 
