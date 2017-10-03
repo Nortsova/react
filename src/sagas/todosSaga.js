@@ -1,50 +1,44 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { todosApi } from 'api';
-import { LOAD_TODOS, ADD_TODO, EDIT_TODO, DELETE_TODO, CHECK_TODO, TODOS_LOADED, TODO_ADDED, TODO_EDITED, TODO_DELETED, TODO_CHECKED } from '../constants';
+import { LOAD_TODOS, ADD_TODO, EDIT_TODO, DELETE_TODO, CHECK_TODO } from 'const';
+
+// import normalize from '../utils/normalizeData';
+
+import { loadTodos, todoAdded, todosLoaded, todoEdited, todoDeleted, todoChecked } from '../actions';
 
 
-function* loadTodos() {
+function* loadTodosSaga() {
   const { data } = yield call(todosApi.getDataRequest);
-  yield put({ type: TODOS_LOADED,
-    payload: {
-      data,
-    },
-  });
+  // const transformedData = normalize(data);
+  yield put(todosLoaded(data));
 }
 
 function* addTodo({ payload: { title } }) {
   const todo = yield call(todosApi.addItemRequest, { title });
-  yield put({ type: TODO_ADDED,
-    payload: todo,
-  });
+  yield put(todoAdded(todo));
 }
 
 function* editTodo({ payload: { id, title } }) {
   const data = yield call(todosApi.editItemRequest, id, { title });
-  yield put({ type: TODO_EDITED,
-    payload: data,
-  });
+  yield put(todoEdited(data));
 }
 function* deleteTodo({ payload: { id } }) {
   yield call(todosApi.deleteItemRequest, id);
-  yield put({ type: TODO_DELETED,
-    payload: { id },
-  });
+  yield put(todoDeleted(id));
 }
 function* checkTodo({ payload: { id } }) {
   const data = yield call(todosApi.checkItemRequest, id);
-  yield put({ type: TODO_CHECKED,
-    payload: data,
-  });
+  yield put(todoChecked(data));
 }
 
 export default function* todosSaga() {
   yield [
-    takeEvery(LOAD_TODOS, loadTodos),
+    takeEvery(LOAD_TODOS, loadTodosSaga),
     takeEvery(ADD_TODO, addTodo),
     takeEvery(EDIT_TODO, editTodo),
     takeEvery(DELETE_TODO, deleteTodo),
     takeEvery(CHECK_TODO, checkTodo),
   ];
+  yield put(loadTodos());
 }
 
