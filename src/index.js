@@ -5,11 +5,11 @@ import { Provider } from 'react-redux';
 import App from './App';
 import './styles/styles.scss';
 import storeData from './store';
-import { getData, loading } from './actions';
+import { loading, loadTodos } from 'actions';
 
 
 storeData.dispatch(loading());
-storeData.dispatch(getData());
+storeData.dispatch(loadTodos());
 render(
   <Provider store={storeData}>
     <App />

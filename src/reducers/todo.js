@@ -1,26 +1,17 @@
 import { createReducer } from 'redux-create-reducer';
-import { GET_DATA, ADD_ITEM, EDIT_ITEM, DELETE_ITEM, CHECK_ITEM } from 'actions';
+import { TODOS_LOADED, TODO_ADDED, TODO_EDITED, TODO_DELETED, TODO_CHECKED } from '../constants';
 
 const initialState = [];
 
 
 const todo = createReducer(initialState, {
-  [GET_DATA]: (state, { payload: { data } }) => (data),
-  [ADD_ITEM]: (state, { payload }) => (
+  [TODOS_LOADED]: (state, { payload: { data } }) => (data),
+  [TODO_ADDED]: (state, { payload }) => (
     [...state, payload]
   ),
-  [CHECK_ITEM]: (state, { payload: { id } }) => (
-    state.map((item) => {
-      if (item.id !== id) {
-        return item;
-      }
-      return {
-        ...item,
-        checked: !item.checked,
-      };
-    })
-  ),
-
+  [TODO_EDITED]: (state, { payload: { data } }) => (data),
+  [TODO_DELETED]: (state, { payload: { data } }) => (data),
+  [TODO_CHECKED]: (state, { payload: { data } }) => (data),
 });
 
 export default todo;

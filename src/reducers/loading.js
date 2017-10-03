@@ -1,12 +1,12 @@
 import { createReducer } from 'redux-create-reducer';
-import { LOADING, GET_DATA } from 'actions';
+import { LOADING, TODOS_LOADED } from '../constants';
 
 const initialState = false;
 
 
 const loading = createReducer(initialState, {
   [LOADING]: () => (true),
-  [GET_DATA]: () => (false),
+  [TODOS_LOADED]: () => (false),
 
 });
 

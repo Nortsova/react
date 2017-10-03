@@ -32,10 +32,11 @@ app.get('/', (req, res) => {
 
 app.get('/api/data', (req, res) => {
   readFile((err, data) => {
-    res.json(JSON.parse(data));
+    res.json({ data: JSON.parse(data) });
   });
 });
 app.post('/api/data', (req, res) => {
+  console.log(req);
   readFile((err, data) => {
     const array = JSON.parse(data);
     const newItem = {

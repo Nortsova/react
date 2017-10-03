@@ -2,7 +2,7 @@
 import request from './request';
 
 
-export const getDataRequest = () => request('api/data').then(data => ({ data }));
+export const getDataRequest = () => request('api/data');
 
 export const addItemRequest = data => request('api/data', {
   method: 'POST',
