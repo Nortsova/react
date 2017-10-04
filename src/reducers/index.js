@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import todo from './todo';
-import loading from './loading';
+import ui from './ui';
 
 const reducer = combineReducers({
   data: todo,
-  loading,
+  ui,
+  form: formReducer,
 });
 
 export default reducer;

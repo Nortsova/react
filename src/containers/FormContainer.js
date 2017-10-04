@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { Form } from 'components';
-import { addTodo } from 'actions';
+import actions from 'actions';
 
+const { addTodo } = actions;
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   onAdd: addTodo,

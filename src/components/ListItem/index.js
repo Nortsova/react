@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 
 import { ListItemForm, ListItemElement } from 'components';
 
+import './style.scss';
+
 class ListItem extends Component {
   state = {
     editing: false,

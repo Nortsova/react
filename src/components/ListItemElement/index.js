@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './style.scss';
+
 const ListItemElement = ({ checked, title, handleEdit, handleDelete, handleChecked }) => (
   <li className={checked ? 'done' : ''}>
     <div className="text">{title}</div>

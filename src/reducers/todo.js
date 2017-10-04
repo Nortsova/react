@@ -1,5 +1,7 @@
 import { createReducer } from 'redux-create-reducer';
-import { TODOS_LOADED, TODO_ADDED, TODO_EDITED, TODO_DELETED, TODO_CHECKED } from '../constants';
+import constants from 'const';
+
+const { TODOS_LOADED, TODO_ADDED, TODO_EDITED, TODO_DELETED, TODO_CHECKED } = constants;
 
 const initialState = {};
 

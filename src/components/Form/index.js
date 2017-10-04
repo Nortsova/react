@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Field, reduxForm } from 'redux-form';
 
-class Form extends Component {
+import './style.scss';
+
+class DisconnectedForm extends Component {
  state = {
    title: '',
  }
@@ -32,8 +35,14 @@ class Form extends Component {
  );
 }
 
-Form.propTypes = {
+
+DisconnectedForm.propTypes = {
   onAdd: PropTypes.func.isRequired,
 };
 
-export default Form;
+// const Form = reduxForm({
+//   form: 'contact',
+// })(DisconnectedForm);
+
+export default DisconnectedForm;
+

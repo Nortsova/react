@@ -1,16 +1,18 @@
 import { takeEvery, put, call } from 'redux-saga/effects';
 import { todosApi } from 'api';
-import { LOAD_TODOS, ADD_TODO, EDIT_TODO, DELETE_TODO, CHECK_TODO } from 'const';
+import constants from 'const';
 
-// import normalize from '../utils/normalizeData';
+const { LOAD_TODOS, ADD_TODO, EDIT_TODO, DELETE_TODO, CHECK_TODO } = constants;
+import normalize from 'utils/normalizeData';
 
-import { loadTodos, todoAdded, todosLoaded, todoEdited, todoDeleted, todoChecked } from '../actions';
+import actions from 'actions';
 
+const { loadTodos, todoAdded, todosLoaded, todoEdited, todoDeleted, todoChecked } = actions;
 
 function* loadTodosSaga() {
   const { data } = yield call(todosApi.getDataRequest);
-  // const transformedData = normalize(data);
-  yield put(todosLoaded(data));
+  const transformedData = normalize(data);
+  yield put(todosLoaded(transformedData));
 }
 
 function* addTodo({ payload: { title } }) {
@@ -20,6 +22,7 @@ function* addTodo({ payload: { title } }) {
 
 function* editTodo({ payload: { id, title } }) {
   const data = yield call(todosApi.editItemRequest, id, { title });
+  console.log(data);
   yield put(todoEdited(data));
 }
 function* deleteTodo({ payload: { id } }) {

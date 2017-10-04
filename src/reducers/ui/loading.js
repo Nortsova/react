@@ -1,6 +1,7 @@
 import { createReducer } from 'redux-create-reducer';
-import { LOADING, TODOS_LOADED } from '../constants';
+import constants from 'const';
 
+const { LOADING, TODOS_LOADED } = constants;
 const initialState = false;
 
 

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItem } from 'components';
 
+import './style.scss';
 
 const List = ({ data, loading, onEdit, onDelete, onCheck }) => (
   <ul className="task-list">
