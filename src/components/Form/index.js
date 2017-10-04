@@ -40,9 +40,9 @@ DisconnectedForm.propTypes = {
   onAdd: PropTypes.func.isRequired,
 };
 
-// const Form = reduxForm({
-//   form: 'contact',
-// })(DisconnectedForm);
+const Form = reduxForm({
+  form: 'contact',
+})(DisconnectedForm);
 
-export default DisconnectedForm;
+export default Form;
 
