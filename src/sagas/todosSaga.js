@@ -22,7 +22,6 @@ function* addTodo({ payload: { title } }) {
 
 function* editTodo({ payload: { id, title } }) {
   const data = yield call(todosApi.editItemRequest, id, { title });
-  console.log(data);
   yield put(todoEdited(data));
 }
 function* deleteTodo({ payload: { id } }) {

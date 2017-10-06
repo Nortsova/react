@@ -1,48 +1,55 @@
-const path = require('path');
-const webpack = require('webpack');
+import Webpack from 'webpack';
+import path from 'path';
+import config from './config.json';
 
-module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+const HotModuleReplacementPlugin = new Webpack.HotModuleReplacementPlugin();
+
+const {
+  hotLoader: {
+    host: hotHost,
+    port: hotPort,
+  },
+} = config;
+
+export default {
+  devtool: 'source-map',
   entry: [
-    'webpack-hot-middleware/client',
-    'babel-polyfill',
-    './src/index',
+    `webpack-dev-server/client?http://${hotHost}:${hotPort}`,
+    'webpack/hot/dev-server',
+    path.join(__dirname, './src/index.js'),
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '/static/'),
     filename: 'bundle.js',
-    publicPath: '/static/',
-  },
-  plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-  ],
-  resolve: {
-    extensions: ['.js', '.jsx', '.json'],
-    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    publicPath: '/',
   },
   module: {
-    rules: [
+    loaders: [
       {
-        test: /\.js$/,
-        include: [
-          path.resolve(__dirname, 'src'),
-        ],
-        use: [
-          { loader: 'react-hot-loader' },
-          {
-            loader: 'babel-loader',
-            options: {
-              plugins: ['transform-runtime'],
-            },
-          },
-        ],
+        test: /\.js/,
+        exclude: /node_modules/,
+        loader: 'babel-loader?cacheDirectory',
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader',
       },
       {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\.(scss|sass|css)$/,
+        loader: 'style-loader!css-loader!sass-loader?cacheDirectory',
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader',
       },
     ],
   },
+  resolve: {
+    modules: [
+      'src',
+      'node_modules',
+    ],
+  },
+  plugins: [
+    HotModuleReplacementPlugin,
+  ],
 };
