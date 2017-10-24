@@ -1,61 +1,35 @@
 import Router from 'koa-router';
-import {createTodoService, updateTodoService} from '../services/index';
+import { getTodoService, createTodoService, updateTodoService, updateTodoCheckedService, deleteTodoService } from '../services/index';
 
 let data = [{"title":"task 01","id":"47cee948-137a-4dc3-96ab-59305ce1cba9","checked":false},{"title":"task 02","id":"b322009e-94ab-4dd2-a882-172682531184","checked":false},{"title":"task 03 aa","id":"c77a7686-ec9a-465c-b2ee-75e434bffc48","checked":false}];
 
-const getList = (ctx) => {
+
+const getList = async (ctx) => {
 	ctx.body = {
-		data,
+		data: await getTodoService(),
 	}
 }
 
-const createTodo = (ctx) => {
+const createTodo = async (ctx) => {
 	let {title} = ctx.request.body;
-	let newTodo = createTodoService(title);
-	data.push(newTodo);
-	ctx.body = newTodo;
+	ctx.body = await createTodoService(title);
 }
-const updateTodo = (ctx) => {
+const updateTodo = async (ctx) => {
 	let {title} = ctx.request.body;
 	let id = ctx.params.id;
-	let changedItem;
-    const newArray = data.map((item) => {
-      if (item.id === id) {
-        const arrayObj = item;
-        arrayObj.title = title;
-        changedItem = updateTodoService(title, item);
-      }
-      return item;
-	});
-	data = newArray;
-	ctx.body = changedItem;
+	ctx.body =  await updateTodoService(title, id);
 }
 
-const deleteTodo = (ctx) => {
-	let id = ctx.params.id;
-	let index = 0;
-	data.forEach((item, currIndex) => {
-		if (item.id === id.toString()) {
-		index = currIndex;
-		}
-	});
-	data.splice(index, 1);
-	ctx.body = {status: 'ok'};
+const deleteTodo = async (ctx) => {
+	let { id } = ctx.params;
+	let result = await deleteTodoService(id);
+	ctx.body =  result;
 }
 
-const checkTodo = (ctx) => {
-	let id = ctx.params.id;
-    let changedItem;
-    const newArray = data.map((item) => {
-      if (item.id !== id) {
-        return item;
-      }
-      const newItem = item;
-      newItem.checked = !item.checked;
-      changedItem = newItem;
-      return newItem;
-    });
-	ctx.body = changedItem;
+const checkTodo = async (ctx) => {
+	let { id } = ctx.params;
+	let result = await updateTodoCheckedService(id);
+	ctx.body =  result;
 }
 
 

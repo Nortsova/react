@@ -1,6 +1,8 @@
-export default data => data.reduce((prev, current) => ({
-  ...prev,
-  [current.id]: {
-    ...current,
-  },
-}), {});
+export default data => data.reduce((prev, current) => {
+  return ({
+    ...prev,
+    [current.id]: {
+      ...current,
+    },
+  })
+}, {});

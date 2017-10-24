@@ -1,6 +1,7 @@
 import Router from 'koa-router';
 import configureTodos from './todos.controller';
 
+
 export const configurePublic = () => {
 	const publicRouter = Router();
 	return publicRouter.routes();

@@ -7,7 +7,7 @@ import actions from 'actions';
 const { addTodo } = actions;
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  onAdd: addTodo,
+  onSubmit: ({title}) => addTodo(title)
 }, dispatch);
 
 const FormContainer = connect(null, mapDispatchToProps)(Form);
