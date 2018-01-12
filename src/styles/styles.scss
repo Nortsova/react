@@ -1,0 +1,23 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+h1 {
+	margin: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+.app {
+	width:300px;
+	background-color: crimson;
+	margin: 15px auto;
+	padding: 10px 30px; 
+	border-radius: 6px;
+}
+.app h1 {
+	text-align: center;
+	margin: 10px 0;
+}
+
